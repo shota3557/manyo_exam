@@ -4,7 +4,9 @@
 <p>投稿内容:<%= @task.content %></p>
 <p>終了期限:<%= @task.end_date %></p>
 <p>進捗状況:<%= @task.status %></p>
-<p>進捗状況:<%= @task.priority %></p>
-
+<p>優先度:<%= @task.priority %></p>
+<p>タグ:<% @task.labels.each do |label| %>
+  <%= label.name %>
+<% end %></p>
 <%= link_to "編集画面へ", edit_task_path(@task.id) %>
 <%= link_to "投稿一覧へ", tasks_path %>

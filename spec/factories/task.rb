@@ -7,6 +7,7 @@ FactoryBot.define do
       end_date { '002022-11-10' }
       status { '完成' }
       priority { '高い' }
+      association :user
     end
     # 作成するテストデータの名前を「second_task」とします
     # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
