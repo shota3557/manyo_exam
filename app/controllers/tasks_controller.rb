@@ -5,17 +5,19 @@ class TasksController < ApplicationController
   
   def index
     if params[:task].present? && params[:task][:name].present? && params[:status].present? && params[:status][:name].present?
-      @tasks = Task.task_name(params[:task][:name]).status_name(params[:status][:name]).page(params[:page]).per(2)
+      @tasks = Task.task_name(params[:task][:name]).status_name(params[:status][:name]).page(params[:page]).per(5)
     elsif params[:task].present? && params[:task][:name].present?
-      @tasks = Task.task_name(params[:task][:name]).page(params[:page]).per(2)
+      @tasks = Task.task_name(params[:task][:name]).page(params[:page]).per(5)
     elsif params[:status].present? && params[:status][:name].present?
-      @tasks = Task.status_name(params[:status][:name]).page(params[:page]).per(2)
+      @tasks = Task.status_name(params[:status][:name]).page(params[:page]).per(5)
     elsif params[:sort_expired]  
-      @tasks = Task.sort_expired.page(params[:page]).per(2)
+      @tasks = Task.sort_expired.page(params[:page]).per(5)
     elsif params[:rank]
-      @tasks = Task.rank.page(params[:page]).per(2)
+      @tasks = Task.rank.page(params[:page]).per(5)
+    elsif params[:label_id].present?
+      @tasks = Label.find(params[:label_id]).tasks.page(params[:page]).per(5)
     else  
-      @tasks = Task.all.includes(:user).order(created_at: :desc).page(params[:page]).per(2)
+      @tasks = Task.all.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
     end
   end
   
